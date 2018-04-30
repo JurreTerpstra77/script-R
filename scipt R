@@ -1,0 +1,73 @@
+setwd("C:/Users/jurre/Desktop/biology shit/Community Ecology Research/data")
+library("viewdata")
+# work directory is set
+
+d<- read.csv("dataset plankton goed.csv", header= TRUE, sep= ";", dec= ".") 
+viewdata(d)
+head(d)
+summary(d)
+str(d)
+library("ggplot2")
+library("car")
+view(d)
+
+d$Absolute_Latitude <- abs(d$Latitude)
+# column made for absolute latitude
+
+d[d==0]<-NA
+# for each zero value it does not calculate it in the plot
+ 
+ggplot(d, aes(x=d$Absolute_Latitude, y=d$unidentified)) + 
+      geom_point() +stat_smooth (method = 'lm')
+# single plot for species and their relative abundance compared to latitude
+
+for(i in 23:72) { 
+  
+  abund_plot <- ggplot(d, aes(x=d$Absolute_Latitude, y=d[,i])) + 
+                geom_point()
+
+  pdf(paste("Rel_Abund_", colnames(d)[i], ".pdf", sep= " "))
+   print(abund_plot)
+  dev.off()
+  
+} 
+
+
+
+
+# every plot for relation between absolute latitude and relative abundances has been saved.
+
+ssp_columns <- 23:72
+
+for(i in ssp_columns) { # loop through the columns
+  
+  for(j in 1:nrow(d)){ # loop through rows)
+    
+    ssp_columns[ssp_columns != i] # the columns that are not i
+    
+    
+    
+    
+  
+    
+    
+  }
+  
+}
+  
+View(d)
+print(d)
+
+
+  
+
+
+       
+        
+              
+
+  
+
+
+
+
